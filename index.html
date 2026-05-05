@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="ImageTool">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>GB Photos Edit</title>
+<title>GB Photo Edit Tool</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;600&display=swap');
 :root {
@@ -267,8 +267,8 @@ canvas {
 </head>
 <body>
 
-<h1>// GB Photos Edit</h1>
-<p class="sub">280×240 · BASELINE JPG · &lt;100KB</p>
+<h1>// GB Photo Edit Tool</h1>
+<p class="sub">280×240 · BASELINE JPG · &lt;300KB</p>
 
 <div class="tabs">
   <div class="tab active" onclick="switchTab('single',this)">INDIVIDUAL</div>
@@ -295,9 +295,9 @@ canvas {
 
     <div class="slider-row">
       <label>Calidad</label>
-      <input type="range" id="quality" min="10" max="90" value="70"
+      <input type="range" id="quality" min="10" max="95" value="95"
              oninput="document.getElementById('qv').innerText=this.value+'%'; updatePreview()">
-      <span class="slider-val" id="qv">70%</span>
+      <span class="slider-val" id="qv">95%</span>
     </div>
 
     <div class="info-bar" id="info-bar"></div>
@@ -327,9 +327,9 @@ canvas {
 
     <div class="slider-row">
       <label>Calidad</label>
-      <input type="range" id="batch-quality" min="10" max="90" value="70"
+      <input type="range" id="batch-quality" min="10" max="95" value="95"
              oninput="document.getElementById('bqv').innerText=this.value+'%'">
-      <span class="slider-val" id="bqv">70%</span>
+      <span class="slider-val" id="bqv">95%</span>
     </div>
 
     <div class="batch-list" id="batch-list"></div>
@@ -413,7 +413,7 @@ function updatePreview() {
   const bar = document.getElementById('info-bar');
   bar.innerHTML =
     chip('280×240', 'ok') +
-    chip(kb + ' KB', kb <= 100 ? 'ok' : kb <= 150 ? 'warn' : 'bad') +
+    chip(kb + ' KB', kb <= 300 ? 'ok' : kb <= 400 ? 'warn' : 'bad') +
     chip('Baseline JPG', 'ok');
 }
 
@@ -434,8 +434,8 @@ function processAndSave() {
   const q    = document.getElementById('quality').value / 100;
   const data = canvas.toDataURL('image/jpeg', q);
   const kb   = Math.round((data.length * 3) / 4 / 1024);
-  if (kb > 100) {
-    alert('La imagen pesa ' + kb + ' KB. Reduce la calidad por debajo de 100 KB antes de guardar.');
+  if (kb > 300) {
+    alert('La imagen pesa ' + kb + ' KB. Reduce la calidad por debajo de 300 KB antes de guardar.');
     return;
   }
   triggerDownload(data, gbFilename() + '.jpg');
